@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -18,13 +19,19 @@ const Hero = () => {
               we have everything you need at unbeatable prices.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center group">
+              <Link 
+                to="/shop"
+                className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center group"
+              >
                 Shop Now
                 <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition-colors">
+              </Link>
+              <Link 
+                to="/shop"
+                className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition-colors text-center"
+              >
                 View Categories
-              </button>
+              </Link>
             </div>
           </div>
           <div className="text-center">

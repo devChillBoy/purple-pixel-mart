@@ -1,10 +1,13 @@
 
 import React, { useState } from 'react';
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { getTotalItems } = useCart();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -19,7 +22,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="gradient-purple-blue text-white p-2 rounded-lg">
               <div className="w-8 h-8 flex items-center justify-center font-bold text-xl">
                 D
@@ -28,7 +31,7 @@ const Header = () => {
             <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
               DigiShop
             </h1>
-          </div>
+          </Link>
 
           {/* Search bar */}
           <div className="hidden md:flex flex-1 max-w-xl mx-8">
@@ -51,12 +54,14 @@ const Header = () => {
               <span>Account</span>
             </button>
             
-            <button className="relative p-2 text-gray-700 hover:text-purple-600 transition-colors">
+            <Link to="/cart" className="relative p-2 text-gray-700 hover:text-purple-600 transition-colors">
               <ShoppingCart className="w-6 h-6" />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                3
-              </span>
-            </button>
+              {getTotalItems() > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {getTotalItems()}
+                </span>
+              )}
+            </Link>
 
             {/* Mobile menu button */}
             <button 
@@ -86,10 +91,10 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 py-4 border-t border-gray-200">
             <nav className="space-y-2">
-              <a href="#" className="block py-2 text-gray-700 hover:text-purple-600">Electronics</a>
-              <a href="#" className="block py-2 text-gray-700 hover:text-purple-600">Fashion</a>
-              <a href="#" className="block py-2 text-gray-700 hover:text-purple-600">Home & Garden</a>
-              <a href="#" className="block py-2 text-gray-700 hover:text-purple-600">Sports</a>
+              <Link to="/shop" className="block py-2 text-gray-700 hover:text-purple-600">Shop</Link>
+              <Link to="/about" className="block py-2 text-gray-700 hover:text-purple-600">About</Link>
+              <Link to="/contact" className="block py-2 text-gray-700 hover:text-purple-600">Contact</Link>
+              <Link to="/cart" className="block py-2 text-gray-700 hover:text-purple-600">Cart</Link>
               <a href="#" className="block py-2 text-gray-700 hover:text-purple-600">Account</a>
             </nav>
           </div>
@@ -100,12 +105,9 @@ const Header = () => {
       <nav className="hidden md:block bg-gray-50 border-t border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex space-x-8 py-3">
-            <a href="#" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">Electronics</a>
-            <a href="#" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">Fashion</a>
-            <a href="#" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">Home & Garden</a>
-            <a href="#" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">Sports</a>
-            <a href="#" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">Books</a>
-            <a href="#" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">Beauty</a>
+            <Link to="/shop" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">Shop</Link>
+            <Link to="/about" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">About</Link>
+            <Link to="/contact" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">Contact</Link>
           </div>
         </div>
       </nav>
